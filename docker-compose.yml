@@ -97,6 +97,8 @@ services:
       - ./nginx/config/:/etc/nginx/conf.d/:ro
       - ./certbot/www/:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
+    networks:
+      - elk
 
   certbot:
     image: certbot/certbot:latest
