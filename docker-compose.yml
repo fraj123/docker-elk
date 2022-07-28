@@ -86,6 +86,22 @@ services:
     depends_on:
       - elasticsearch
 
+  nginx:
+    image: nginx:latest
+    container_name: webelk
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/config/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/cerbot/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/cerbot/:rw
+
 networks:
   elk:
     driver: bridge
